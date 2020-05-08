@@ -9,7 +9,6 @@ import (
 	"os"
 
 	"github.com/mbilski/sql-migrate"
-	migrate "github.com/rubenv/sql-migrate"
 	"gopkg.in/gorp.v1"
 	"gopkg.in/yaml.v2"
 
