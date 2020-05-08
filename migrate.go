@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rubenv/sql-migrate/sqlparse"
+	"github.com/mbilski/sql-migrate/sqlparse"
 	"gopkg.in/gorp.v1"
 )
 
@@ -169,6 +169,7 @@ func (b byId) Less(i, j int) bool { return b[i].Less(b[j]) }
 type MigrationRecord struct {
 	Id        string    `db:"id"`
 	AppliedAt time.Time `db:"applied_at"`
+	Down      string    `db:"down"`
 }
 
 type OracleDialect struct {
@@ -477,6 +478,7 @@ func (ms MigrationSet) ExecMax(db *sql.DB, dialect string, m MigrationSource, di
 			err = executor.Insert(&MigrationRecord{
 				Id:        migration.Id,
 				AppliedAt: time.Now(),
+				Down:      strings.Join(migration.Down, ";"),
 			})
 			if err != nil {
 				if trans, ok := executor.(*gorp.Transaction); ok {
@@ -725,7 +727,7 @@ func (ms MigrationSet) getMigrationDbMap(db *sql.DB, dialect string) (*gorp.DbMa
 
 	// When using the mysql driver, make sure that the parseTime option is
 	// configured, otherwise it won't map time columns to time.Time. See
-	// https://github.com/rubenv/sql-migrate/issues/2
+	// https://github.com/mbilski/sql-migrate/issues/2
 	if dialect == "mysql" {
 		var out *time.Time
 		err := db.QueryRow("SELECT NOW()").Scan(&out)

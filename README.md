@@ -2,9 +2,9 @@
 
 > SQL Schema migration tool for [Go](http://golang.org/). Based on [gorp](https://github.com/go-gorp/gorp) and [goose](https://bitbucket.org/liamstask/goose).
 
-[![Build Status](https://travis-ci.org/rubenv/sql-migrate.svg?branch=master)](https://travis-ci.org/rubenv/sql-migrate) [![GoDoc](https://godoc.org/github.com/rubenv/sql-migrate?status.png)](https://godoc.org/github.com/rubenv/sql-migrate)
+[![Build Status](https://travis-ci.org/mbilski/sql-migrate.svg?branch=master)](https://travis-ci.org/mbilski/sql-migrate) [![GoDoc](https://godoc.org/github.com/mbilski/sql-migrate?status.png)](https://godoc.org/github.com/mbilski/sql-migrate)
 
-Using [modl](https://github.com/jmoiron/modl)? Check out [modl-migrate](https://github.com/rubenv/modl-migrate).
+Using [modl](https://github.com/jmoiron/modl)? Check out [modl-migrate](https://github.com/mbilski/modl-migrate).
 
 ## Features
 
@@ -22,7 +22,7 @@ Using [modl](https://github.com/jmoiron/modl)? Check out [modl-migrate](https://
 To install the library and command line program, use the following:
 
 ```bash
-go get -v github.com/rubenv/sql-migrate/...
+go get -v github.com/mbilski/sql-migrate/...
 ```
 
 ## Usage
@@ -99,12 +99,12 @@ Use the `status` command to see the state of the applied migrations:
 
 ```bash
 $ sql-migrate status
-+---------------+-----------------------------------------+
++---------------|-----------------------------------------+
 |   MIGRATION   |                 APPLIED                 |
-+---------------+-----------------------------------------+
++---------------|-----------------------------------------+
 | 1_initial.sql | 2014-09-13 08:19:06.788354925 +0000 UTC |
 | 2_record.sql  | no                                      |
-+---------------+-----------------------------------------+
++---------------|-----------------------------------------+
 ```
 
 #### Running Test Integrations
@@ -138,7 +138,7 @@ Oracle Driver is [oci8](https://github.com/mattn/go-oci8), it is not pure Go cod
 To install the library and command line program, use the following:
 
 ```bash
-go get -tags oracle -v github.com/rubenv/sql-migrate/...
+go get -tags oracle -v github.com/mbilski/sql-migrate/...
 ```
 
 ```yml
@@ -158,7 +158,7 @@ To install the library and command line program, use the following:
 
 1. Install sql-migrate
 ```bash
-go get -tags godror -v github.com/rubenv/sql-migrate/...
+go get -tags godror -v github.com/mbilski/sql-migrate/...
 ```
 
 2. Download Oracle Office Client(e.g. macos, click [Instant Client](https://www.oracle.com/database/technologies/instant-client/downloads.html) if you are other system)
@@ -185,7 +185,7 @@ development:
 Import sql-migrate into your application:
 
 ```go
-import "github.com/rubenv/sql-migrate"
+import "github.com/mbilski/sql-migrate"
 ```
 
 Set up a source of migrations, this can be from memory, from a set of files, from bindata (more on that later), or from any library that implements [`http.FileSystem`](https://godoc.org/net/http#FileSystem):
@@ -247,7 +247,7 @@ fmt.Printf("Applied %d migrations!\n", n)
 
 Note that `n` can be greater than `0` even if there is an error: any migration that succeeded will remain applied even if a later one fails.
 
-Check [the GoDoc reference](https://godoc.org/github.com/rubenv/sql-migrate) for the full documentation.
+Check [the GoDoc reference](https://godoc.org/github.com/mbilski/sql-migrate) for the full documentation.
 
 ## Writing migrations
 Migrations are defined in SQL files, which contain a set of SQL statements. Special comments are used to distinguish up and down migrations.
